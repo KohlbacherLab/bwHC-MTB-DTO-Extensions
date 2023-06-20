@@ -1,7 +1,10 @@
 package de.bwhc.mtb.dto.extensions
 
 
-
+import scala.util.{
+  Try,
+  Success
+}
 import de.bwhc.mtb.dtos.{
   Coding,
   ICD10GM,
@@ -111,8 +114,11 @@ object CodingExtensions
               .find(_.code.value == coding.code.value)
 
           case Some(version) =>
-            catalogs.topographyCodings(version)
-              .find(_.code.value == coding.code.value)
+            Try {
+              catalogs.topographyCodings(version)
+                .find(_.code.value == coding.code.value)
+            }
+            .getOrElse(None)
         }
       )
       .map(icdo3 => coding.copy(display = Some(icdo3.display)))
@@ -135,8 +141,11 @@ object CodingExtensions
               .find(_.code.value == coding.code.value)
 
           case Some(version) =>
-            catalogs.morphologyCodings(version)
-              .find(_.code.value == coding.code.value)
+            Try {
+              catalogs.morphologyCodings(version)
+                .find(_.code.value == coding.code.value)
+            }
+            .getOrElse(None)
         }
       )
       .map(icdo3 => coding.copy(display = Some(icdo3.display)))
