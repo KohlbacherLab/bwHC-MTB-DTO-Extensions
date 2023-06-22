@@ -125,6 +125,32 @@ object CodingExtensions
       .getOrElse(coding)
     }
 
+    def subClasses(
+      implicit catalogs: ICDO3Catalogs
+    ): Set[Coding[ICDO3T]] = {
+
+      val codings =
+      coding.version
+        .map(catalogs.topographyCodings(_))
+        .getOrElse(catalogs.topographyCodings())
+       
+      codings  
+        .find(_.code.value == coding.code.value)
+        .map(
+          _.subClasses
+           .flatMap(code => codings.find(_.code == code))
+           .map(
+             subClass => 
+               Coding(
+                 ICDO3T(subClass.code.value),
+                 Some(subClass.display),
+                 Some(subClass.version)
+             )
+           )
+        )
+        .getOrElse(Set.empty)
+    }
+
   }
 
 
@@ -150,6 +176,32 @@ object CodingExtensions
       )
       .map(icdo3 => coding.copy(display = Some(icdo3.display)))
       .getOrElse(coding)
+    }
+
+    def subClasses(
+      implicit catalogs: ICDO3Catalogs
+    ): Set[Coding[ICDO3M]] = {
+
+      val codings =
+      coding.version
+        .map(catalogs.morphologyCodings(_))
+        .getOrElse(catalogs.morphologyCodings())
+       
+      codings  
+        .find(_.code.value == coding.code.value)
+        .map(
+          _.subClasses
+           .flatMap(code => codings.find(_.code == code))
+           .map(
+             subClass => 
+               Coding(
+                 ICDO3M(subClass.code.value),
+                 Some(subClass.display),
+                 Some(subClass.version)
+             )
+           )
+        )
+        .getOrElse(Set.empty)
     }
 
   }

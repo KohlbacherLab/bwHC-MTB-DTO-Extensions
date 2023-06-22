@@ -43,6 +43,13 @@ class CodingExtensionTests extends AnyFlatSpec
       None
     )
 
+  val icdo3T =
+    Coding(
+      ICD10GM("C25"),
+      None,
+      None
+    )
+
 
   "Coding[ICD10GM]" must "have been completed" in {
 
@@ -77,6 +84,30 @@ class CodingExtensionTests extends AnyFlatSpec
 
     c25.superClass must not be defined
   }
+
+
+
+  "Coding[ICDO3T]" must "have been completed" in {
+
+    val coding = icdo3T.complete
+
+    coding.display mustBe defined  
+    coding.version mustBe defined  
+
+  }
+
+
+  "Coding[ICDO3T] subClasses" must "have been correctly resolved" in {
+
+    val subClasses = icdo3T.subClasses
+
+    subClasses must not be empty
+
+    forAll(subClasses){ _.code.value must startWith ("C25") }
+
+  }
+
+
 
 
   val mTOR =
