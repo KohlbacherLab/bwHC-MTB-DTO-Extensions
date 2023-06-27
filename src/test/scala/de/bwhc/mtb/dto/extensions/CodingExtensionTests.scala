@@ -126,14 +126,29 @@ class CodingExtensionTests extends AnyFlatSpec
       None
     )
 
+  val monoclonal =
+    Medication.Coding(
+      Medication.Code("L01XC"),
+      Medication.System.ATC,
+      None,
+      Some("2021")
+    )
+
+   
+
+
 
   "Medication.Coding" must "have been completed" in {
 
-     val coding = everolimus.complete
-
-     coding.display mustBe defined  
-     coding.version mustBe defined  
-
+    forAll(
+      List(mTOR,everolimus,monoclonal)
+        .map(_.complete)
+    ){
+      coding =>
+       
+        coding.display mustBe defined  
+        coding.version mustBe defined  
+    }
   }
 
 
