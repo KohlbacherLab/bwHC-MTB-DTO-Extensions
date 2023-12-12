@@ -4,7 +4,7 @@
 name := "mtb-dto-extensions"
 ThisBuild / organization := "de.bwhc"
 ThisBuild / scalaVersion := "2.13.8"
-ThisBuild / version := "1.0-SNAPSHOT"
+ThisBuild / version := "1.0"
 
 
 //-----------------------------------------------------------------------------
@@ -16,11 +16,11 @@ lazy val root = project.in(file("."))
   .settings(
     libraryDependencies ++= Seq(
       "org.scalatest"  %% "scalatest"               % "3.1.1" % Test,
-      "de.bwhc"        %% "mtb-dtos"                % "1.0-SNAPSHOT",
+      "de.bwhc"        %% "mtb-dtos"                % "1.0",
       "de.bwhc"        %% "hgnc-api"                % "1.0",
       "de.bwhc"        %% "hgnc-impl"               % "1.0" % Test,
-      "de.bwhc"        %% "medication-catalog-api"  % "1.0",
-      "de.bwhc"        %% "medication-catalog-impl" % "1.0" % Test,
+      "de.bwhc"        %% "medication-catalog-api"  % "1.1",
+      "de.bwhc"        %% "medication-catalog-impl" % "1.1" % Test,
       "de.bwhc"        %% "icd-catalogs-api"        % "1.1",
       "de.bwhc"        %% "icd-catalogs-impl"       % "1.1" % Test,
    )

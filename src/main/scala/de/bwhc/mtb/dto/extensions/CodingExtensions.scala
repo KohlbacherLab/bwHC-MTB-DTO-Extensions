@@ -218,7 +218,10 @@ object CodingExtensions
       coding.system match {
         case ATC =>
           atcCatalogs
-            .findWithCode(coding.code.value,coding.version.getOrElse(atcCatalogs.latestVersion))
+            .findWithCode(
+              coding.code.value,
+              coding.version.getOrElse(atcCatalogs.latestVersion)
+            )
             .map(
               atc =>
                 coding.copy(
@@ -240,7 +243,10 @@ object CodingExtensions
       coding.system match {
         case ATC =>
           atcCatalogs
-            .findWithCode(coding.code.value,coding.version.getOrElse(atcCatalogs.latestVersion))
+            .findWithCode(
+              coding.code.value,
+              coding.version.getOrElse(atcCatalogs.latestVersion)
+            )
             .filter(
               _.kind == ATCMedication.Kind.Substance
             )
@@ -268,7 +274,10 @@ object CodingExtensions
       coding.system match {
         case ATC =>
           atcCatalogs
-            .findWithCode(coding.code.value,coding.version.getOrElse(atcCatalogs.latestVersion))
+            .findWithCode(
+              coding.code.value,
+              coding.version.getOrElse(atcCatalogs.latestVersion)
+            )
             .filter(
               _.kind == ATCMedication.Kind.Group
             )
